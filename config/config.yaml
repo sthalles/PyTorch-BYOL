@@ -1,0 +1,21 @@
+network:
+  name: resnet18
+  projection_head:
+    mlp_hidden_size: 512
+    projection_size: 128
+
+data_transforms:
+  s: 1
+  input_shape: (32,32,3)
+
+trainer:
+  batch_size: 32
+  m: 0.996 # momentum update
+  checkpoint_interval: 5000
+  max_epochs: 40
+  num_workers: 4
+
+optimizer:
+  params:
+    lr: 0.0003
+    weight_decay: 0.0004
