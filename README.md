@@ -51,5 +51,5 @@ During training, BYOL learns features using the STL10 ```train+unsupervised``` s
 |:----------------------------:|:------------------:|:------------:|:-----------:|:--------------------:|:------:|:-----------:|:-----------:|
 |      Logistic Regression     |    PCA Features    |       -      |     256     |           -          |    -   |             |    36.0%    |
 |              KNN             |    PCA Features    |       -      |     256     |           -          |    -   |             |    31.8%    |
-| Logistic Regression  (LBFGS) |     BYOL (SGD)     |   ResNet-18  |     512     |          128         |   40   | 64          |    70.1%    |
+| Logistic Regression  (Adam) |     BYOL (SGD)     |   ResNet-18  |     512     |          128         |   40   | 64          |    70.1%    |
 
