@@ -26,14 +26,23 @@ def main():
 
     # online network
     online_network = ResNet18(**config['network']).to(device)
+    pretrained_folder = config['network']['fine_tune_from']
 
-    # load pre-trained parameters
-    load_params = torch.load(os.path.join('./runs/Jun18_09-44-56_thallessilva/checkpoints/model40.pth'),
-                             map_location=torch.device(torch.device(device)))
+    # load pre-trained model if defined
+    if pretrained_folder:
+        try:
+            checkpoints_folder = os.path.join('./runs', pretrained_folder, 'checkpoints')
 
-    if 'online_network_state_dict' in load_params:
-        online_network.load_state_dict(load_params['online_network_state_dict'])
-        print("Parameters successfully loaded.")
+            # load pre-trained parameters
+            load_params = torch.load(os.path.join(os.path.join(checkpoints_folder, 'model.pth')),
+                                     map_location=torch.device(torch.device(device)))
+
+            if 'online_network_state_dict' in load_params:
+                online_network.load_state_dict(load_params['online_network_state_dict'])
+                print("Parameters successfully loaded.")
+
+        except FileNotFoundError:
+            print("Pre-trained weights not found. Training from scratch.")
 
     # predictor network
     predictor = MLPHead(in_channels=online_network.projetion.net[-1].out_features,

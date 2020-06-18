@@ -77,15 +77,10 @@ class BYOLTrainer:
                 self._update_target_network_parameters()  # update the key encoder
                 niter += 1
 
-                # if niter % self.checkpoint_interval == 0:
-                #     # save checkpoints
-                #     self.save_model(os.path.join(model_checkpoints_folder, 'model' + str(epoch_counter) + '.pth'))
-                #     self.checkpoint_interval *= 2
-
             print("End of epoch {}".format(epoch_counter))
 
         # save checkpoints
-        self.save_model(os.path.join(model_checkpoints_folder, 'model' + str(self.max_epochs) + '.pth'))
+        self.save_model(os.path.join(model_checkpoints_folder, 'model.pth'))
 
     def update(self, batch_view_1, batch_view_2):
         # compute query feature
