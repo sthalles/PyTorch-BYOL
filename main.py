@@ -4,7 +4,7 @@ from torchvision import datasets
 from data.multi_view_data_injector import MultiViewDataInjector
 from data.transforms import get_simclr_data_transforms
 from models.mlp_head import MLPHead
-from models.model import ResNet18
+from models.resnet_base_network import ResNet18, TinyResNet
 from trainer import BYOLTrainer
 
 print(torch.__version__)
@@ -19,7 +19,7 @@ def main():
 
     data_transform = get_simclr_data_transforms(**config['data_transforms'])
 
-    train_dataset = datasets.STL10('./data', split='train+unlabeled', download=True,
+    train_dataset = datasets.STL10('/home/thalles/Downloads/', split='train+unlabeled', download=True,
                                    transform=MultiViewDataInjector([data_transform, data_transform]))
 
     # online network
@@ -32,8 +32,8 @@ def main():
     # target encoder
     target_network = ResNet18(**config['network']).to(device)
 
-    optimizer = torch.optim.Adam(list(online_network.parameters()) + list(predictor.parameters()),
-                                 **config['optimizer']['params'])
+    optimizer = torch.optim.SGD(list(online_network.parameters()) + list(predictor.parameters()),
+                                **config['optimizer']['params'])
 
     trainer = BYOLTrainer(online_network=online_network,
                           target_network=target_network,

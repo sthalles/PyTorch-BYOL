@@ -6,10 +6,10 @@ network:
 
 data_transforms:
   s: 1
-  input_shape: (32,32,3)
+  input_shape: (96,96,3)
 
 trainer:
-  batch_size: 32
+  batch_size: 64
   m: 0.996 # momentum update
   checkpoint_interval: 5000
   max_epochs: 40
@@ -17,5 +17,6 @@ trainer:
 
 optimizer:
   params:
-    lr: 0.0003
+    lr: 0.03
+    momentum: 0.9
     weight_decay: 0.0004
