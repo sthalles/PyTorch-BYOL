@@ -14,7 +14,7 @@ $ python run.py
 
 Before running PyTorch BYOL, make sure you choose the correct running configurations on the config.yaml file.
 
-```
+```yaml
 network:
   name: resnet18 # base encoder. choose one of resnet18 or resnet50
    
