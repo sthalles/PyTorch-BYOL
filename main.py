@@ -1,10 +1,12 @@
+import os
+
 import torch
 import yaml
 from torchvision import datasets
 from data.multi_view_data_injector import MultiViewDataInjector
 from data.transforms import get_simclr_data_transforms
 from models.mlp_head import MLPHead
-from models.resnet_base_network import ResNet18, TinyResNet
+from models.resnet_base_network import ResNet18
 from trainer import BYOLTrainer
 
 print(torch.__version__)
@@ -24,6 +26,14 @@ def main():
 
     # online network
     online_network = ResNet18(**config['network']).to(device)
+
+    # load pre-trained parameters
+    load_params = torch.load(os.path.join('./runs/Jun18_09-44-56_thallessilva/checkpoints/model40.pth'),
+                             map_location=torch.device(torch.device(device)))
+
+    if 'online_network_state_dict' in load_params:
+        online_network.load_state_dict(load_params['online_network_state_dict'])
+        print("Parameters successfully loaded.")
 
     # predictor network
     predictor = MLPHead(in_channels=online_network.projetion.net[-1].out_features,
