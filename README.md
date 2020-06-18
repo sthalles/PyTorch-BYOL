@@ -9,7 +9,7 @@ Clone the repository and run
 ```
 $ conda env create --name byol --file env.yml
 $ conda activate byol
-$ python run.py
+$ python main.py
 ```
 
 ## Config
