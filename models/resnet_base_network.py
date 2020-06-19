@@ -8,7 +8,7 @@ class ResNet18(torch.nn.Module):
         super(ResNet18, self).__init__()
         if kwargs['name'] == 'resnet18':
             resnet = models.resnet18(pretrained=False)
-        elif kwargs['name'] == 'resnet18':
+        elif kwargs['name'] == 'resnet50':
             resnet = models.resnet50(pretrained=False)
 
         self.encoder = torch.nn.Sequential(*list(resnet.children())[:-1])
