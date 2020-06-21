@@ -100,7 +100,6 @@ class BYOLTrainer:
 
         torch.save({
             'online_network_state_dict': self.online_network.state_dict(),
-            'encoder_state_dict': self.online_network.encoder.state_dict(),
             'target_network_state_dict': self.target_network.state_dict(),
             'optimizer_state_dict': self.optimizer.state_dict(),
         }, PATH)
