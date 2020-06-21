@@ -37,9 +37,7 @@ def main():
             load_params = torch.load(os.path.join(os.path.join(checkpoints_folder, 'model.pth')),
                                      map_location=torch.device(torch.device(device)))
 
-            if 'online_network_state_dict' in load_params:
-                online_network.load_state_dict(load_params['online_network_state_dict'])
-                print("Parameters successfully loaded.")
+            online_network.load_state_dict(load_params['online_network_state_dict'])
 
         except FileNotFoundError:
             print("Pre-trained weights not found. Training from scratch.")
