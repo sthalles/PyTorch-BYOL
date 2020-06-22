@@ -20,6 +20,9 @@ Before running PyTorch BYOL, make sure you choose the correct running configurat
 network:
   name: resnet18 # base encoder. choose one of resnet18 or resnet50
    
+  # Specify a folder containing a pre-trained model to fine-tune. If training from scratch, pass None.
+  fine_tune_from: 'resnet-18_40-epochs'
+   
   # configurations for the projection and prediction heads
   projection_head: 
     mlp_hidden_size: 512 # Original implementation uses 4096
