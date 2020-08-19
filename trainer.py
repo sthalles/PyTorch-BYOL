@@ -35,7 +35,7 @@ class BYOLTrainer:
     def regression_loss(x, y):
         x = F.normalize(x, dim=1)
         y = F.normalize(y, dim=1)
-        return -2 * (x * y).sum(dim=-1)
+        return 2 - 2 * (x * y).sum(dim=-1)
 
     def initializes_target_network(self):
         # init momentum network as encoder net
