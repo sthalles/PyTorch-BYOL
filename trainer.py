@@ -20,7 +20,6 @@ class BYOLTrainer:
         self.m = params['m']
         self.batch_size = params['batch_size']
         self.num_workers = params['num_workers']
-        self.checkpoint_interval = params['checkpoint_interval']
         _create_model_training_folder(self.writer, files_to_same=["./config/config.yaml", "main.py", 'trainer.py'])
 
     @torch.no_grad()
